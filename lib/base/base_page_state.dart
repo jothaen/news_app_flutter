@@ -4,6 +4,6 @@ import 'package:news_flutter/di/di.dart';
 
 abstract class BasePageState<S extends Cubit, T extends StatefulWidget> extends State<T> {
 
-  final S cubit = CubitsFactory.get<S>();
+  final S bloc = CubitsFactory.get<S>();
 
 }

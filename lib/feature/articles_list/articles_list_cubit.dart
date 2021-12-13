@@ -16,6 +16,14 @@ class ArticlesListPageCubit extends Cubit<ArticlesListBlocState> {
     _fetchArticles();
   }
 
+  void onPullToRefresh() async {
+    _fetchArticles();
+  }
+
+  void onArticleClick(Article article) {
+    // TODO
+  }
+
   void _fetchArticles() async {
     emit(ArticlesLoadingState());
     try {

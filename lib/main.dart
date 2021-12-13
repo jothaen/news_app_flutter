@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:news_flutter/data/articles_repository.dart';
-import 'package:news_flutter/data/dto/article_dto.dart';
 import 'package:news_flutter/feature/articles_list/articles_list_page.dart';
 
 void main() {
   runApp(const MyApp());
-  ArticlesRepository repo = NetworkArticlesRepository();
 }
 
 class MyApp extends StatelessWidget {
