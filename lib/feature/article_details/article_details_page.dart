@@ -33,11 +33,11 @@ class ArticleDetailsPageState extends BasePageState<ArticleDetailsCubit, Article
       bloc: bloc, builder: (context, state) => _uiProvider.getPageLayout(state));
 
   @override
-  void onReadFullArticleClick() {
+  void onReadFullArticleClick(String articleUrl) {
     // navigate to webview
   }
 }
 
 abstract class UiEventsListener {
-  void onReadFullArticleClick();
+  void onReadFullArticleClick(String articleUrl);
 }
