@@ -20,10 +20,6 @@ class ArticlesListPageCubit extends Cubit<ArticlesListBlocState> {
     _fetchArticles();
   }
 
-  void onArticleClick(Article article) {
-    // TODO
-  }
-
   void _fetchArticles() async {
     emit(ArticlesLoadingState());
     try {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_flutter/base/base_page_state.dart';
+import 'package:news_flutter/feature/article_details/article_details_page.dart';
 import 'package:news_flutter/feature/articles_list/articles_list_cubit.dart';
 import 'package:news_flutter/feature/articles_list/articles_list_state.dart';
 import 'package:news_flutter/model/article.dart';
@@ -25,17 +26,12 @@ class ArticlesListPageState extends BasePageState<ArticlesListPageCubit, Article
   }
 
   @override
-  Widget build(BuildContext context) => BlocListener(
-      bloc: bloc,
-      child: BlocBuilder<ArticlesListPageCubit, ArticlesListBlocState>(
-          bloc: bloc, builder: (context, state) => _uiProvider.getPageLayout(state)),
-      listener: (context, state) {
-        // TODO - navigation (?)
-      });
+  Widget build(BuildContext context) => BlocBuilder<ArticlesListPageCubit, ArticlesListBlocState>(
+      bloc: bloc, builder: (context, state) => _uiProvider.getPageLayout(state));
 
   @override
   void onArticleClick(Article article) {
-    // TODO: implement onArticleClick
+    _navigateToArticleDetails(article);
   }
 
   @override
@@ -46,6 +42,10 @@ class ArticlesListPageState extends BasePageState<ArticlesListPageCubit, Article
   @override
   void onRetryClick() {
     bloc.onRetryClick();
+  }
+
+  void _navigateToArticleDetails(Article article) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ArticleDetailsPage(article)));
   }
 }
 
