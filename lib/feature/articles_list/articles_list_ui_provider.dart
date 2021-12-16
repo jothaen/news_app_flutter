@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_flutter/feature/articles_list/articles_list_page.dart';
 import 'package:news_flutter/feature/articles_list/articles_list_state.dart';
@@ -55,7 +56,7 @@ class ArticlesListUiProvider {
 
   Widget _getTitleAndImage(Article item) => Padding(
         padding: const EdgeInsets.only(bottom: 12.0),
-        child: Row(children: [
+        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Expanded(
             child: Text(item.title),
             flex: 6,

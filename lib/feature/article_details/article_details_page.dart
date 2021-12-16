@@ -7,6 +7,7 @@ import 'package:news_flutter/feature/article_details/article_details_state.dart'
 import 'package:news_flutter/feature/article_details/article_details_ui_provider.dart';
 import 'package:news_flutter/feature/articles_list/articles_list_state.dart';
 import 'package:news_flutter/model/article.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ArticleDetailsPage extends StatefulWidget {
   final Article _article;
@@ -34,7 +35,7 @@ class ArticleDetailsPageState extends BasePageState<ArticleDetailsCubit, Article
 
   @override
   void onReadFullArticleClick(String articleUrl) {
-    // navigate to webview
+     launch(articleUrl);
   }
 }
 
