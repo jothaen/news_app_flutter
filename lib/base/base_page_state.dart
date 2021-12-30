@@ -6,4 +6,9 @@ abstract class BasePageState<S extends Cubit, T extends StatefulWidget> extends 
 
   final S bloc = CubitsFactory.get<S>();
 
+  @override
+  void dispose() {
+    bloc.close();
+    super.dispose();
+  }
 }
