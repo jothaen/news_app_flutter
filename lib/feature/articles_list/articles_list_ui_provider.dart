@@ -10,11 +10,10 @@ class ArticlesListUiProvider {
 
   ArticlesListUiProvider(this._uiEventsListener);
 
-  Widget getPageLayout(ArticlesListBlocState state) => Scaffold(appBar: _getAppBar(), body: _getBody(state));
+  Widget getPageLayout(ArticlesListBlocState state) =>
+      Scaffold(body: SafeArea(child: _getBody(state)));
 
-  PreferredSizeWidget _getAppBar() => AppBar(elevation: 0, centerTitle: false, title: const Text("News"));
-
-  Widget? _getBody(ArticlesListBlocState state) {
+  Widget _getBody(ArticlesListBlocState state) {
     if (state is ArticlesLoadingState) {
       return CommonWidgets.circularProgress();
     } else if (state is ArticlesErrorState) {
@@ -23,6 +22,8 @@ class ArticlesListUiProvider {
       return _getNoArticlesBody();
     } else if (state is ArticlesLoadedState) {
       return _getListOfArticlesBody(state.articles);
+    } else {
+      return Container();
     }
   }
 
@@ -33,38 +34,63 @@ class ArticlesListUiProvider {
         ],
       );
 
-  Widget _getNoArticlesBody() => const Center(child: Text("There are no articles available"));
+  Widget _getNoArticlesBody() =>
+      const Center(child: Text("There are no articles available"));
 
   Widget _getListOfArticlesBody(List<Article> articles) => RefreshIndicator(
         onRefresh: () => _uiEventsListener.onPullToRefresh(),
         child: ListView.builder(
-            padding: const EdgeInsets.all(8),
             itemCount: articles.length,
             physics: const AlwaysScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
               Article item = articles[index];
               return Card(
+                margin: const EdgeInsets.all(8),
+                elevation: 12,
+                shape: const Border(),
                 child: ListTile(
-                    onTap: () {
-                      _uiEventsListener.onArticleClick(item);
-                    },
-                    title: _getTitleAndImage(item),
-                    subtitle: item.description.isNotEmpty ? Text(item.description) : null),
+                  minVerticalPadding: 0,
+                  contentPadding: EdgeInsets.zero,
+                  onTap: () {
+                    _uiEventsListener.onArticleClick(item);
+                  },
+                  title: _getImage(item.imageUrl),
+                  subtitle: _getTitleAndAuthor(item.title, item.author),
+                ),
               );
             }),
       );
 
-  Widget _getTitleAndImage(Article item) => Padding(
-        padding: const EdgeInsets.only(bottom: 12.0),
-        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Expanded(
-            child: Text(item.title),
-            flex: 6,
-          ),
-          Expanded(
-            child: item.imageUrl.isNotEmpty ? Image.network(item.imageUrl) : Container(),
-            flex: 4,
-          ),
-        ]),
+  Widget _getTitleAndAuthor(String title, String author) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
+            ),
+            Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  author,
+                  style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                  ),
+                )),
+          ],
+        ),
+      );
+
+  Widget _getImage(String imageUrl) => Hero(
+        tag: imageUrl,
+        child: Image.network(
+          imageUrl,
+          height: 160,
+          fit: BoxFit.cover,
+        ),
       );
 }
