@@ -1,6 +1,12 @@
 # news_flutter
 
-Flutter application displaying news articles fetched from remote API.
+Flutter application displaying news articles fetched from remote API (https://newsapi.org/).
+
+Tech stack:
+- Flutter
+- BLoC architecture pattern
+- GetIt for dependency injection
+
 
 <p float="left">
 <img width="200" alt="screenshot_list" src="https://user-images.githubusercontent.com/6339642/147886108-11a4e458-8f8f-4890-af5d-fdd862acf75d.png">
