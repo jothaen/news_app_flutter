@@ -2,5 +2,10 @@
 
 Flutter application displaying news articles fetched from remote API.
 
-![Articles list](screenshot_list.png | width=100)
-![Article details](screenshot_details.png | width=100)
+<div style="width: 60%; height: 60%">
+![Articles list](screenshot_list.png)
+</div>
+
+<div style="width: 60%; height: 60%">
+![Article details](screenshot_details.png)
+</div>
